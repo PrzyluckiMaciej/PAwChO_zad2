@@ -41,14 +41,6 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
-      -
-        name: Docker Scout
-        id: docker-scout
-        uses: docker/scout-action@v1
-        with:
-          command: cves
-          image: ${{ steps.meta.outputs.tags }}
 
       - 
         name: Build and push Docker image
@@ -63,4 +55,12 @@ jobs:
           cache-to: |
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/zad2:cache  
           tags: ${{ steps.meta.outputs.tags }}
+      
+      -
+        name: Docker Scout
+        id: docker-scout
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: ${{ steps.meta.outputs.tags }}
       
