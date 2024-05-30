@@ -64,7 +64,7 @@ jobs:
           command: cves
           image: ${{ steps.meta.outputs.tags }}
       
-      - run: echo ${{ steps.docker-scout }}
+      - run: echo ${{ steps.docker-scout.cves }}
 
       - 
         name: Login to Github Container registry
