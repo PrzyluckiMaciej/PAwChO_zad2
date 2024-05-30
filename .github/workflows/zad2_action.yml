@@ -91,8 +91,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           cache-from: |
-            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/zad2:cache 
-          cache-to: |
             type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/zad2:cache  
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta_gh.outputs.tags }}
       
