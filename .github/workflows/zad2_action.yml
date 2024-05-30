@@ -63,10 +63,8 @@ jobs:
         with:
           command: cves
           image: ${{ steps.meta.outputs.tags }}
-          sarif-file: sarif.outpus.json
-
-      -
-        run: echo ${{ steps.docker-scout.sarif-file }}
+      
+      - run: echo ${{ steps.docker-scout }}
 
       - 
         name: Login to Github Container registry
