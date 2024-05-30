@@ -75,7 +75,7 @@ jobs:
       
       -
         name: Github metadata definitions
-        id: meta
+        id: meta_gh
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ vars.GHCR_USERNAME }}/zad2
