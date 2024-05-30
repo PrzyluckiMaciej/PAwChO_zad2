@@ -26,6 +26,14 @@ jobs:
           tags: |
             type=sha,priority=100,prefix=sha-,format=short
             type=semver,priority=200,pattern={{version}}   
+        
+      -
+        name: Docker Scout
+        id: docker-scout
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: ${{ steps.meta.outputs.tags }}
 
       - 
         name: QEMU set-up
