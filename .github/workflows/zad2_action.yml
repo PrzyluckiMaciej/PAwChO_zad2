@@ -17,13 +17,11 @@ jobs:
         uses: actions/checkout@v4
       
       -
-        name: Extract metadata definitions
+        name: Docker metadata definitions
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: |
-            ${{ vars.DOCKERHUB_USERNAME }}/zad2
-            ghcr.io/${{ vars.GHCR_USERNAME }}/zad2
+          images: ${{ vars.DOCKERHUB_USERNAME }}/zad2
           flavor: latest=false
           tags: |
             type=sha,priority=100,prefix=sha-,format=short
@@ -45,15 +43,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - 
-        name: Log in to the Container registry
-        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}
-
-      - 
-        name: Build and push Docker image
+        name: Build and push Docker image to DockerHub
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -74,4 +64,35 @@ jobs:
           command: cves
           image: ${{ steps.meta.outputs.tags }}
           only-severities: critical,high
+
+      - 
+        name: Login to Github Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+      
+      -
+        name: Github metadata definitions
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ vars.GHCR_USERNAME }}/zad2
+          flavor: latest=false
+          tags: ${{ steps.meta.outputs.tags }}
+
+      -
+        name: Build and push image to GHCR
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          cache-from: |
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/zad2:cache 
+          cache-to: |
+            type=registry,ref=${{ vars.DOCKERHUB_USERNAME }}/zad2:cache  
+          tags: ${{ steps.meta.outputs.tags }}
       
