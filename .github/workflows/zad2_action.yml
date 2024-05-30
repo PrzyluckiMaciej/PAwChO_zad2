@@ -43,6 +43,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - 
+        name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - 
         name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -63,4 +71,5 @@ jobs:
         with:
           command: cves
           image: ${{ steps.meta.outputs.tags }}
+          only-severities: critical,high
       
