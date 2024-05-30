@@ -23,7 +23,7 @@ jobs:
         with:
           images: |
             ${{ vars.DOCKERHUB_USERNAME }}/zad2
-            ghcr.io/zad2
+            ghcr.io/${{ vars.GHCR_USERNAME }}/zad2
           flavor: latest=false
           tags: |
             type=sha,priority=100,prefix=sha-,format=short
