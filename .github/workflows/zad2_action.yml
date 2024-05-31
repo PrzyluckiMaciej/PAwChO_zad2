@@ -57,7 +57,15 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
       
       -
-        run: docker scout cves ${{ steps.meta.outputs.tags }}
+        name: Docker Scout
+        id: docker-scout
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: ${{ steps.meta.outputs.tags }}
+          only-severities: critical,high
+      
+      - run: echo ${{ steps.docker-scout.outputs.* }}
 
       - 
         name: Login to Github Container registry
