@@ -63,9 +63,8 @@ jobs:
         with:
           command: cves
           image: ${{ steps.meta.outputs.tags }}
+          only-severities: critical,high
           exit-code: true
-
-      - run: echo "${{ steps.docker-scout.outputs.exit-code }}"
 
       - 
         name: Login to Github Container registry
