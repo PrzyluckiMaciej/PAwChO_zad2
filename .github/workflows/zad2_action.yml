@@ -57,20 +57,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
       
       -
-        name: Docker Scout
-        id: docker-scout
-        uses: docker/scout-action@v1
-        with:
-          command: cves
-          image: ${{ steps.meta.outputs.tags }}
-          sarif-file: sarif.output.json
-          summary: true
-      
-      - name: Upload SARIF result
-        id: upload-sarif
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: sarif.output.json
+        run: docker scout cves ${{ steps.meta.outputs.tags }}
 
       - 
         name: Login to Github Container registry
