@@ -20,7 +20,7 @@ with:
     exit-code: true
 ```
 
-<div style="text-align: justify">Opcja <i>only-severities</i> określa poziom zagrożeń, które mają być sprawdzane, natomiast <i>exit-code</i> pozwala na zatrzymanie workflow - w przypadku znalezienia jakichkolwiek podatności na zagrożenia zostanie zwrócony kod "2" i krok zakończy się niepowodzeniem. Używany obraz posiada 7 podatności na poziomie <i>medium</i>, więc w celu sprawdzenia poprawności działania łańcucha workflow został uruchomiony z pominięciem opcji <i>only-severities</i>.</div> <br />
+<div style="text-align: justify">Opcja <i>only-severities</i> określa poziom zagrożeń, które mają być sprawdzane, natomiast <i>exit-code</i> pozwala na zatrzymanie workflow - w przypadku znalezienia jakichkolwiek podatności na zagrożenia zostanie zwrócony kod "2" i krok zakończy się niepowodzeniem. Używany obraz posiada 7 podatności na poziomie <i>medium</i>, więc w celu sprawdzenia poprawności działania łańcucha, workflow został uruchomiony z pominięciem opcji <i>only-severities</i>.</div> <br />
 
 <img src="screenshots/scout_check.png"/> <br />
 
